@@ -1,6 +1,6 @@
 import { Component, input, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LucideAngularModule, ChevronUp, ChevronDown, ChevronLeft, ChevronRight, Loader2 } from 'lucide-angular';
+import { LucideAngularModule, ChevronUp, ChevronDown, ChevronLeft, ChevronRight, LoaderCircle } from 'lucide-angular';
 
 export interface TableColumn<T> {
   key: string;
@@ -26,7 +26,7 @@ type SortableValue = string | number | Date | boolean;
     <div class="table-container">
       @if (loading()) {
         <div class="table-loading">
-          <lucide-angular [img]="Loader2" [size]="24" class="animate-spin"></lucide-angular>
+          <lucide-angular [img]="LoaderCircle" [size]="24" class="animate-spin"></lucide-angular>
           <span>{{ loadingText() }}</span>
         </div>
       } @else if (data().length === 0) {
@@ -183,7 +183,7 @@ export class TableComponent<T extends { id: string | number }> {
   ChevronDown = ChevronDown;
   ChevronLeft = ChevronLeft;
   ChevronRight = ChevronRight;
-  Loader2 = Loader2;
+  LoaderCircle = LoaderCircle;
 
   displayedData = computed(() => {
     let result = [...this.data()];
