@@ -1,7 +1,6 @@
 import { Component, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { LucideAngularModule } from 'lucide-angular';
 
 export interface FooterLink {
   label: string;
@@ -17,7 +16,7 @@ export interface FooterSection {
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [CommonModule, RouterLink, LucideAngularModule],
+  imports: [CommonModule, RouterLink],
   template: `
     <footer class="footer bg-dark-blue text-white">
       <div class="container mx-auto px-5 md:px-12 py-8 lg:py-12">

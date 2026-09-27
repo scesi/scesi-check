@@ -1,6 +1,14 @@
-import { Component, input, output, signal, computed } from '@angular/core';
+import { Component, computed, input, output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LucideAngularModule, Eye, EyeOff, CircleAlert, CircleCheck, LoaderCircle, LucideIconData } from 'lucide-angular';
+import {
+  LucideCircleAlert,
+  LucideCircleCheck,
+  LucideDynamicIcon,
+  LucideEye,
+  LucideEyeOff,
+  LucideLoaderCircle,
+  type LucideIconData,
+} from '@lucide/angular';
 
 export type InputType = 'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'date' | 'search';
 export type InputSize = 'sm' | 'md' | 'lg';
@@ -8,7 +16,15 @@ export type InputSize = 'sm' | 'md' | 'lg';
 @Component({
   selector: 'app-input',
   standalone: true,
-  imports: [CommonModule, LucideAngularModule],
+  imports: [
+    CommonModule,
+    LucideDynamicIcon,
+    LucideEye,
+    LucideEyeOff,
+    LucideCircleAlert,
+    LucideCircleCheck,
+    LucideLoaderCircle,
+  ],
   template: `
     <div class="input-wrapper" [class.focused]="focused()" [class.has-error]="error()">
       @if (label()) {
@@ -23,7 +39,7 @@ export type InputSize = 'sm' | 'md' | 'lg';
       <div class="input-group" [class.input-group-with-icon]="prefixIcon() || suffixIcon() || showPasswordToggle()">
         @if (prefixIcon()) {
           <div class="input-prefix">
-            <lucide-angular [img]="prefixIcon()" [size]="18" aria-hidden="true"></lucide-angular>
+            <svg [lucideIcon]="prefixIcon()" [size]="18" aria-hidden="true"></svg>
           </div>
         }
 
@@ -54,19 +70,23 @@ export type InputSize = 'sm' | 'md' | 'lg';
             [attr.aria-label]="showPassword() ? 'Ocultar contraseña' : 'Mostrar contraseña'"
             [attr.aria-pressed]="showPassword()"
           >
-            <lucide-angular [img]="showPassword() ? EyeOff : Eye" [size]="18" aria-hidden="true"></lucide-angular>
+            @if (showPassword()) {
+              <svg lucideEyeOff [size]="18" aria-hidden="true"></svg>
+            } @else {
+              <svg lucideEye [size]="18" aria-hidden="true"></svg>
+            }
           </button>
         } @else if (suffixIcon()) {
           <div class="input-suffix">
-            <lucide-angular [img]="suffixIcon()" [size]="18" aria-hidden="true"></lucide-angular>
+            <svg [lucideIcon]="suffixIcon()" [size]="18" aria-hidden="true"></svg>
           </div>
         } @else if (loading()) {
           <div class="input-suffix">
-            <lucide-angular [img]="LoaderCircle" [size]="18" class="animate-spin" aria-hidden="true"></lucide-angular>
+            <svg lucideLoaderCircle [size]="18" class="animate-spin" aria-hidden="true"></svg>
           </div>
         } @else if (valid() && !pristine()) {
           <div class="input-suffix">
-            <lucide-angular [img]="CircleCheck" [size]="18" class="text-green-500" aria-hidden="true"></lucide-angular>
+            <svg lucideCircleCheck [size]="18" class="text-green-500" aria-hidden="true"></svg>
           </div>
         }
       </div>
@@ -77,7 +97,7 @@ export type InputSize = 'sm' | 'md' | 'lg';
 
       @if (error()) {
         <div class="input-error" role="alert">
-          <lucide-angular [img]="CircleAlert" [size]="14" aria-hidden="true"></lucide-angular>
+          <svg lucideCircleAlert [size]="14" aria-hidden="true"></svg>
           <span>{{ error() }}</span>
         </div>
       }
@@ -105,8 +125,8 @@ export class InputComponent {
   valid = input(false);
   pristine = input(true);
 
-  prefixIcon = input<LucideIconData | undefined>(undefined);
-  suffixIcon = input<LucideIconData | undefined>(undefined);
+  prefixIcon = input<LucideIconData | null>(null);
+  suffixIcon = input<LucideIconData | null>(null);
   size = input<InputSize>('md');
   maxLength = input<number | null>(null);
   showPassword = signal(false);
@@ -118,12 +138,6 @@ export class InputComponent {
 
   focused = signal(false);
   dirty = signal(false);
-
-  Eye = Eye;
-  EyeOff = EyeOff;
-  CircleAlert = CircleAlert;
-  CircleCheck = CircleCheck;
-  LoaderCircle = LoaderCircle;
 
   describedBy = computed(() => {
     const ids: string[] = [];

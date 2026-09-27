@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { InputComponent } from './input';
-import { Mail } from 'lucide-angular';
+import { LucideMail } from '@lucide/angular';
 import { vi, describe, it, expect, beforeEach } from 'vitest';
 
 describe('InputComponent', () => {
@@ -153,7 +153,7 @@ describe('InputComponent', () => {
   });
 
   it('should show prefix icon when provided', () => {
-    fixture.componentRef.setInput('prefixIcon', Mail);
+    fixture.componentRef.setInput('prefixIcon', LucideMail.icon);
     fixture.detectChanges();
 
     const prefix = fixture.debugElement.query(By.css('.input-prefix'));
