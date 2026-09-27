@@ -10,8 +10,16 @@ export const adminRoutes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'settings',
+        redirectTo: 'dashboard',
         pathMatch: 'full'
+      },
+      {
+        path: 'dashboard',
+        loadComponent: () => import('./dashboard/dashboard').then(m => m.AdminDashboardComponent)
+      },
+      {
+        path: 'users',
+        loadComponent: () => import('./users/users').then(m => m.UserManagementComponent)
       },
       {
         path: 'settings',
