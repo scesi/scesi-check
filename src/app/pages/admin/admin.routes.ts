@@ -18,6 +18,10 @@ export const adminRoutes: Routes = [
         loadComponent: () => import('./dashboard/dashboard').then(m => m.AdminDashboardComponent)
       },
       {
+        path: 'users',
+        loadComponent: () => import('./users/users').then(m => m.UserManagementComponent)
+      },
+      {
         path: 'settings',
         loadComponent: () => import('./settings/settings').then(m => m.SettingsPageComponent)
       }

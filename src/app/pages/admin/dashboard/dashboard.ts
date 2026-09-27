@@ -21,8 +21,8 @@ interface StatCard {
     <main class="space-y-6">
       <section class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
-          <p class="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-text-muted">Resumen</p>
-          <h1 class="text-3xl font-semibold text-text">Panel de control</h1>
+          <p class="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-text-muted">Panel</p>
+          <h1 class="text-3xl font-semibold text-text">Resumen del sistema</h1>
         </div>
 
         <div class="flex items-center gap-3">
@@ -30,7 +30,7 @@ interface StatCard {
             Configuración
           </app-button>
           <app-button size="sm" routerLink="/admin/users">
-            Gestionar usuarios
+            Ver usuarios
           </app-button>
         </div>
       </section>
@@ -54,7 +54,7 @@ interface StatCard {
       </section>
 
       <section class="grid gap-6 xl:grid-cols-[1.7fr_1fr]">
-        <app-card title="Actividad reciente" description="Estado operativo del sistema en las últimas 24 horas.">
+        <app-card title="Actividad reciente" description="Últimas acciones registradas en el sistema.">
           <div class="mt-4 space-y-4">
             @for (activity of recentActivity(); track activity.title) {
               <div class="flex items-start gap-3 rounded-xl bg-off-white p-3">
@@ -71,20 +71,17 @@ interface StatCard {
           </div>
         </app-card>
 
-        <app-card title="Acciones rápidas" description="Atajos para el control operativo.">
+        <app-card title="Acciones rápidas" description="Atajos para gestionar el control de acceso.">
           <div class="mt-4 space-y-3">
-            <a routerLink="/admin/settings" class="flex items-center justify-between rounded-xl border border-[#e7e7e7] bg-white px-4 py-3 text-sm font-medium text-text transition hover:border-primary hover:text-primary">
-              <span>Configurar parámetros</span>
-              <span aria-hidden="true">→</span>
-            </a>
-            <a routerLink="/admin/users" class="flex items-center justify-between rounded-xl border border-[#e7e7e7] bg-white px-4 py-3 text-sm font-medium text-text transition hover:border-primary hover:text-primary">
-              <span>Administrar usuarios</span>
-              <span aria-hidden="true">→</span>
-            </a>
-            <a routerLink="/admin/settings" class="flex items-center justify-between rounded-xl border border-[#e7e7e7] bg-white px-4 py-3 text-sm font-medium text-text transition hover:border-primary hover:text-primary">
-              <span>Revisar multas</span>
-              <span aria-hidden="true">→</span>
-            </a>
+            <app-button variant="secondary" [fullWidth]="true" routerLink="/admin/users">
+              Administrar usuarios
+            </app-button>
+            <app-button variant="secondary" [fullWidth]="true" routerLink="/admin/settings">
+              Configurar sistema
+            </app-button>
+            <app-button variant="ghost" [fullWidth]="true" routerLink="/admin/login">
+              Ir a login
+            </app-button>
           </div>
         </app-card>
       </section>
