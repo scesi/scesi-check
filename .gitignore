@@ -5,7 +5,9 @@
 /tmp
 /out-tsc
 /bazel-out
-
+/.atl
+design.md
+AGENTS.md
 # Node
 /node_modules
 npm-debug.log
