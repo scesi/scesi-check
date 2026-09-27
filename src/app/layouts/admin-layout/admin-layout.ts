@@ -52,6 +52,7 @@ export class AdminLayoutComponent {
     { label: 'Dashboard', route: '/admin' },
     { label: 'Configuración', route: '/admin/settings' },
     { label: 'Usuarios', route: '/admin/users' },
+    { label: 'ESP32', route: '/admin/reader' },
     { label: 'Eventos', route: '/admin/events' }
   ];
 
@@ -59,6 +60,7 @@ export class AdminLayoutComponent {
     { label: 'Inicio', route: '/admin', exact: true },
     { label: 'Configuración', route: '/admin/settings' },
     { label: 'Usuarios', route: '/admin/users' },
+    { label: 'ESP32', route: '/admin/reader' },
     { label: 'Eventos', route: '/admin/events' }
   ];
 }
