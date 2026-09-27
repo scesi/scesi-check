@@ -10,7 +10,7 @@
     "serve:ssr:check": "node dist/check/server/server.mjs"
   },
   "private": true,
-  "packageManager": "pnpm@11.13.0",
+  "packageManager": "pnpm@12.6.0",
   "dependencies": {
     "@angular/common": "^22.0.0",
     "@angular/compiler": "^22.0.0",
