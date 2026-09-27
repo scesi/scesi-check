@@ -33,7 +33,7 @@ describe('FooterComponent', () => {
   it('should render brand logo', () => {
     const logoLink = fixture.debugElement.query(By.css('.footer-brand a[routerLink="/"]'));
     expect(logoLink).toBeTruthy();
-    expect(logoLink.nativeElement.getAttribute('aria-label')).toBe('SCESI Inicio');
+    expect(logoLink.nativeElement.getAttribute('aria-label')).toBe('check Inicio');
   });
 
   it('should render brand description', () => {
@@ -71,7 +71,7 @@ describe('FooterComponent', () => {
   it('should render copyright text', () => {
     const copyright = fixture.debugElement.query(By.css('.footer-bottom p'));
     expect(copyright).toBeTruthy();
-    expect(copyright.nativeElement.textContent).toContain('© 2024 SCESI');
+    expect(copyright.nativeElement.textContent).toContain('© 2026 check');
   });
 
   it('should have external links with correct attributes', () => {

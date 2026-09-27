@@ -43,7 +43,7 @@ describe('HeaderComponent', () => {
   it('should render logo link', () => {
     const logoLink = fixture.debugElement.query(By.css('a[routerLink="/"]'));
     expect(logoLink).toBeTruthy();
-    expect(logoLink.nativeElement.getAttribute('aria-label')).toBe('SCESI Inicio');
+    expect(logoLink.nativeElement.getAttribute('aria-label')).toBe('check Inicio');
   });
 
   it('should have navigation container', () => {

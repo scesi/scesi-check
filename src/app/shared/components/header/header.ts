@@ -1,6 +1,7 @@
 import { Component, input, output, signal, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { LucideAngularModule, Menu, X } from 'lucide-angular';
 
 export interface NavLink {
   label: string;
@@ -11,15 +12,15 @@ export interface NavLink {
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive],
+  imports: [CommonModule, RouterLink, RouterLinkActive, LucideAngularModule],
   template: `
     <header class="header" [class.scrolled]="isScrolled()">
       <div class="container mx-auto flex items-center justify-between h-full px-5 md:px-12">
-        <a routerLink="/" class="flex-shrink-0" aria-label="SCESI Inicio">
+        <a routerLink="/" class="shrink-0" aria-label="check Inicio">
           <img 
             src="/logo.svg" 
-            alt="SCESI Logo" 
-            class="h-10 w-auto max-w-[75px]"
+            alt="check Logo" 
+            class="h-10 w-auto max-w-18.75"
             width="75"
             height="40"
           >
@@ -56,13 +57,9 @@ export interface NavLink {
           aria-controls="mobile-menu"
           aria-label="Abrir menú">
           @if (!mobileMenuOpen()) {
-            <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
+            <lucide-angular [img]="Menu" [size]="24" aria-hidden="true"></lucide-angular>
           } @else {
-            <svg id="close-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
+            <lucide-angular [img]="X" [size]="24" aria-hidden="true"></lucide-angular>
           }
         </button>
       </div>
@@ -104,6 +101,9 @@ export class HeaderComponent {
 
   mobileMenuOpen = signal(false);
   isScrolled = signal(false);
+
+  Menu = Menu;
+  X = X;
 
   @HostListener('window:scroll')
   onWindowScroll(): void {
