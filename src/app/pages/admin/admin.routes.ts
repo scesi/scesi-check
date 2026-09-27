@@ -24,6 +24,10 @@ export const adminRoutes: Routes = [
       {
         path: 'settings',
         loadComponent: () => import('./settings/settings').then(m => m.SettingsPageComponent)
+      },
+      {
+        path: 'reader',
+        loadComponent: () => import('./reader/reader').then(m => m.ReaderManagementComponent)
       }
     ]
   },
