@@ -9,6 +9,7 @@ import { Event, CreateEventRequest, UpdateEventRequest } from '@shared/models/ev
 import { LateFee } from '@shared/models/late-fee';
 import { Attendance } from '@shared/models/attendance';
 import { FingerprintEnrollment, WifiConfig } from '@shared/models/device';
+import { Settings, UpdateSettingsRequest } from '@shared/models/settings';
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
@@ -122,6 +123,15 @@ export class ApiService {
 
   deleteEvent(id: number): Observable<ApiResponse<boolean>> {
     return this.delete<boolean>(`/event/${id}`);
+  }
+
+  // Settings
+  getSettings(): Observable<ApiResponse<Settings>> {
+    return this.get<Settings>('/settings');
+  }
+
+  updateSettings(data: UpdateSettingsRequest): Observable<ApiResponse<Settings>> {
+    return this.patch<Settings>('/settings', data);
   }
 
   // Attendance
