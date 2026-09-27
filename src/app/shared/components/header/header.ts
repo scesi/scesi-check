@@ -1,7 +1,7 @@
-import { Component, input, output, signal, HostListener } from '@angular/core';
+import { Component, input, signal, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { LucideAngularModule, Menu, X } from 'lucide-angular';
+import { LucideMenu, LucideX } from '@lucide/angular';
 
 export interface NavLink {
   label: string;
@@ -12,7 +12,7 @@ export interface NavLink {
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive, LucideAngularModule],
+  imports: [CommonModule, RouterLink, RouterLinkActive, LucideMenu, LucideX],
   template: `
     <header class="header" [class.scrolled]="isScrolled()">
       <div class="container mx-auto flex items-center justify-between h-full px-5 md:px-12">
@@ -57,9 +57,9 @@ export interface NavLink {
           aria-controls="mobile-menu"
           aria-label="Abrir menú">
           @if (!mobileMenuOpen()) {
-            <lucide-angular [img]="Menu" [size]="24" aria-hidden="true"></lucide-angular>
+            <svg lucideMenu [size]="24" aria-hidden="true"></svg>
           } @else {
-            <lucide-angular [img]="X" [size]="24" aria-hidden="true"></lucide-angular>
+            <svg lucideX [size]="24" aria-hidden="true"></svg>
           }
         </button>
       </div>
@@ -101,9 +101,6 @@ export class HeaderComponent {
 
   mobileMenuOpen = signal(false);
   isScrolled = signal(false);
-
-  Menu = Menu;
-  X = X;
 
   @HostListener('window:scroll')
   onWindowScroll(): void {

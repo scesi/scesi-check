@@ -1,6 +1,12 @@
-import { Component, input, computed, signal } from '@angular/core';
+import { Component, computed, input, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LucideAngularModule, ChevronUp, ChevronDown, ChevronLeft, ChevronRight, LoaderCircle } from 'lucide-angular';
+import {
+  LucideChevronDown,
+  LucideChevronLeft,
+  LucideChevronRight,
+  LucideChevronUp,
+  LucideLoaderCircle,
+} from '@lucide/angular';
 
 export interface TableColumn<T> {
   key: string;
@@ -21,12 +27,19 @@ type SortableValue = string | number | Date | boolean;
 @Component({
   selector: 'app-table',
   standalone: true,
-  imports: [CommonModule, LucideAngularModule],
+  imports: [
+    CommonModule,
+    LucideChevronDown,
+    LucideChevronLeft,
+    LucideChevronRight,
+    LucideChevronUp,
+    LucideLoaderCircle,
+  ],
   template: `
     <div class="table-container">
       @if (loading()) {
         <div class="table-loading">
-          <lucide-angular [img]="LoaderCircle" [size]="24" class="animate-spin"></lucide-angular>
+          <svg lucideLoaderCircle [size]="24" class="animate-spin"></svg>
           <span>{{ loadingText() }}</span>
         </div>
       } @else if (data().length === 0) {
@@ -61,8 +74,8 @@ type SortableValue = string | number | Date | boolean;
                       <span>{{ column.header }}</span>
                       @if (column.sortable) {
                         <div class="sort-icons">
-                          <lucide-angular [img]="ChevronUp" [size]="12" class="sort-icon"></lucide-angular>
-                          <lucide-angular [img]="ChevronDown" [size]="12" class="sort-icon"></lucide-angular>
+                          <svg lucideChevronUp [size]="12" class="sort-icon"></svg>
+                          <svg lucideChevronDown [size]="12" class="sort-icon"></svg>
                         </div>
                       }
                     </div>
@@ -127,7 +140,7 @@ type SortableValue = string | number | Date | boolean;
                 (click)="goToPage(currentPage() - 1)"
                 [disabled]="currentPage() === 1"
               >
-                <lucide-angular [img]="ChevronLeft" [size]="16"></lucide-angular>
+                <svg lucideChevronLeft [size]="16"></svg>
               </button>
               @for (page of pageNumbers(); track page) {
                 <button
@@ -142,7 +155,7 @@ type SortableValue = string | number | Date | boolean;
                 (click)="goToPage(currentPage() + 1)"
                 [disabled]="currentPage() === totalPages()"
               >
-                <lucide-angular [img]="ChevronRight" [size]="16"></lucide-angular>
+                <svg lucideChevronRight [size]="16"></svg>
               </button>
             </div>
           </div>
@@ -178,12 +191,6 @@ export class TableComponent<T extends { id: string | number }> {
   sortDirection = signal<'asc' | 'desc'>('asc');
   currentPage = signal(1);
   selectedIds = signal<Set<string | number>>(new Set());
-
-  ChevronUp = ChevronUp;
-  ChevronDown = ChevronDown;
-  ChevronLeft = ChevronLeft;
-  ChevronRight = ChevronRight;
-  LoaderCircle = LoaderCircle;
 
   displayedData = computed(() => {
     let result = [...this.data()];
